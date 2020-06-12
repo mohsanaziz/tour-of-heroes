@@ -27,7 +27,12 @@
     "help": "nx help"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@nestjs/common": "^6.8.3",
+    "@nestjs/core": "^6.8.3",
+    "@nestjs/platform-express": "^6.8.3",
+    "reflect-metadata": "^0.1.13"
+  },
   "devDependencies": {
     "@angular/cli": "9.1.0",
     "@commitlint/cli": "^8.3.5",
@@ -43,7 +48,10 @@
     "pretty-quick": "^2.0.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "@nrwl/node": "9.3.0",
+    "@nestjs/schematics": "^6.7.0",
+    "@nestjs/testing": "^6.8.3"
   },
   "husky": {
     "hooks": {
