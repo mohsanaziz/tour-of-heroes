@@ -33,6 +33,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-angular": "^8.3.4",
     "@nrwl/angular": "^9.3.0",
+    "@nrwl/nest": "^9.3.0",
     "@nrwl/workspace": "9.3.0",
     "@types/node": "~8.9.4",
     "dotenv": "6.2.0",
