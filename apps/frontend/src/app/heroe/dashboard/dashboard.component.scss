@@ -1,0 +1,27 @@
+:host {
+  display: grid;
+  gap: 20px;
+}
+
+.top {
+  &-heroes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+  }
+
+  &-heroe {
+    background-color: var(--primary);
+    padding: 16px;
+    color: white;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--accent);
+      cursor: pointer;
+      color: var(--text);
+    }
+  }
+}
