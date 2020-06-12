@@ -30,13 +30,23 @@
   "dependencies": {},
   "devDependencies": {
     "@angular/cli": "9.1.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-angular": "^8.3.4",
     "@nrwl/workspace": "9.3.0",
     "@types/node": "~8.9.4",
     "dotenv": "6.2.0",
+    "eslint": "6.8.0",
+    "husky": "^4.2.5",
+    "prettier": "2.0.4",
+    "pretty-quick": "^2.0.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "eslint": "6.8.0",
-    "typescript": "~3.8.3",
-    "prettier": "2.0.4"
+    "typescript": "~3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
