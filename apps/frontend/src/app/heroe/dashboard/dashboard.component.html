@@ -1,1 +1,7 @@
-<p>dashboard works!</p>
+<h1>Top Heroes</h1>
+
+<div class="top-heroes">
+  <a *ngFor="let hero of heroes$ | async" class="top-heroe">
+    <span>{{ hero.name }}</span>
+  </a>
+</div>

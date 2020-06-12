@@ -1,4 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Heroe } from '../heroe.model';
+import { HeroeService } from '../heroe.service';
 
 @Component({
   selector: 'maz-dashboard',
@@ -7,7 +11,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
+  public heroes$: Observable<Heroe[]>;
 
-  ngOnInit(): void {}
+  constructor(private heroeService: HeroeService) {}
+
+  ngOnInit(): void {
+    this.heroes$ = this.heroeService.getHeroes();
+  }
 }
