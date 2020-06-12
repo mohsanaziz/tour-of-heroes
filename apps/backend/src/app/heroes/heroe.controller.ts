@@ -1,5 +1,5 @@
 import { InjectInMemoryDBService, InMemoryDBEntityController, InMemoryDBService } from '@nestjs-addons/in-memory-db';
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
 import { Heroe } from './heroe';
 
@@ -11,49 +11,60 @@ export class HeroeController extends InMemoryDBEntityController<Heroe> {
 
   /**
    * Get all heroes.
+   *
+   * @param {string} [query] The name of heroes to search.
+   *
+   * @returns A list of heroe.
    */
   @Get()
-  getHeroes() {
+  getHeroes(@Query('query') query?: string): Heroe[] {
+    if (query) {
+      return this.heroeService.query((heroe: Heroe) => heroe.name.toLowerCase().includes(query.toLowerCase()));
+    }
     return this.heroeService.getAll();
   }
 
   /**
    * Create a heroe.
    *
-   * @param heroe The heroe to create.
+   * @param {Heroe} heroe The heroe to create.
+   *
+   * @returns The heroe created.
    */
   @Post()
-  addHeroe(@Body() heroe: Heroe) {
+  addHeroe(@Body() heroe: Heroe): Heroe {
     return this.heroeService.create(heroe);
   }
 
   /**
    * Update a heroe.
    *
-   * @param heroe The heroe to update.
+   * @param {Heroe} heroe The heroe to update.
    */
   @Put()
-  editHeroe(@Body() heroe: Heroe) {
+  editHeroe(@Body() heroe: Heroe): void {
     return this.heroeService.update(heroe);
   }
 
   /**
    * Delete a heroe.
    *
-   * @param id id of the heroe.
+   * @param {number} id id of the heroe.
    */
   @Delete(':id')
-  deleteHeroe(@Param('id') id: number) {
+  deleteHeroe(@Param('id') id: number): void {
     return this.heroeService.delete(id);
   }
 
   /**
    * Get the heroe.
    *
-   * @param id id of the heroe.
+   * @param {number} id id of the heroe.
+   *
+   * @returns The heroe.
    */
   @Get(':id')
-  getHeroe(@Param('id') id: number) {
+  getHeroe(@Param('id') id: number): Heroe {
     return this.heroeService.get(id);
   }
 }
