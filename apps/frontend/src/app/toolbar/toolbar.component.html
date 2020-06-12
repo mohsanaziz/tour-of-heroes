@@ -1,8 +1,8 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z3">
+<mat-toolbar class="toolbar mat-elevation-z3">
   <ng-content select="h1"></ng-content>
 
   <mat-nav-list>
-    <a mat-list-item> Dashbord </a>
-    <a mat-list-item> Heroes </a>
+    <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active"> <span> Dashbord </span> </a>
+    <a mat-list-item> <span> Heroes </span> </a>
   </mat-nav-list>
 </mat-toolbar>

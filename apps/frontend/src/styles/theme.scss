@@ -43,3 +43,7 @@ $frontend-theme: mat-light-theme($frontend-primary, $frontend-accent, $frontend-
 @include mat-core-theme($frontend-theme);
 @include mat-toolbar-theme($frontend-theme);
 @include mat-list-theme($frontend-theme);
+
+:root {
+  --primary: #{mat-color(map-get($frontend-theme, primary))};
+}
