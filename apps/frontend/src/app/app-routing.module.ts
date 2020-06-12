@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./heroe/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  {
+    path: 'heroes',
+    loadChildren: () => import('./heroe/heroes/heroes.module').then((m) => m.HeroesModule),
+  },
 ];
 
 @NgModule({
