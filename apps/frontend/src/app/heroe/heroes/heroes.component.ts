@@ -24,6 +24,9 @@ export class HeroesComponent implements OnInit {
    * Add a heroe.
    */
   addHeroe(): void {
+    if (!this.heroeName) {
+      return;
+    }
     this.heroeService.addHeroe({ name: this.heroeName }).subscribe(() => {
       this.heroes$ = this.heroeService.getHeroes();
       this.changeDetectorRef.markForCheck();

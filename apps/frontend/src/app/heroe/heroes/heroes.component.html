@@ -3,7 +3,7 @@
 <div class="flex-gap">
   <label for="hero-name">Hero name :</label>
   <mat-form-field appearance="outline">
-    <input id="hero-name" matInput [(ngModel)]="heroeName" />
+    <input id="hero-name" matInput [(ngModel)]="heroeName" (keyup.enter)="addHeroe()" />
   </mat-form-field>
   <button mat-flat-button color="primary" (click)="addHeroe()">Add</button>
 </div>
