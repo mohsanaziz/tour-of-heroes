@@ -1,1 +1,16 @@
-<p>heroes works!</p>
+<h1>My Heroes</h1>
+
+<div class="flex-gap">
+  <label for="hero-name">Hero name :</label>
+  <mat-form-field appearance="outline">
+    <input id="hero-name" matInput />
+  </mat-form-field>
+  <button mat-flat-button color="primary">Add</button>
+</div>
+
+<mat-chip-list class="mat-chip-list-stacked">
+  <mat-chip *ngFor="let heroe of heroes$ | async" selected color="primary" removable>
+    {{ heroe.name }}
+    <mat-icon matChipRemove>close</mat-icon>
+  </mat-chip>
+</mat-chip-list>
