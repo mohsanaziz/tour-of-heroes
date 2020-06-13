@@ -24,4 +24,15 @@ export class HeroeService {
     }
     return this.http.get<Heroe[]>(this.HEROE_API);
   }
+
+  /**
+   * Create a heroe.
+   *
+   * @param {Heroe} heroe The heroe to create.
+   *
+   * @returns The heroe created.
+   */
+  addHeroe(heroe: { name: string }): Observable<Heroe> {
+    return this.http.post<Heroe>(this.HEROE_API, heroe);
+  }
 }
