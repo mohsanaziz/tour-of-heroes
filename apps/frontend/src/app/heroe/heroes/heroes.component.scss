@@ -1,0 +1,21 @@
+.flex-gap > * {
+  margin: 10px 0 0 10px;
+}
+
+.flex-gap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -10px 0 0 -10px;
+  width: calc(100% + 12px);
+}
+
+mat-chip {
+  max-width: 250px;
+  display: flex;
+  justify-content: space-between;
+
+  mat-icon {
+    opacity: 1 !important;
+  }
+}
