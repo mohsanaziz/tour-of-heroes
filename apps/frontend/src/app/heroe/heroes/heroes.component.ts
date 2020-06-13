@@ -30,4 +30,16 @@ export class HeroesComponent implements OnInit {
     });
     this.heroeName = '';
   }
+
+  /**
+   * Delete a heroe.
+   *
+   * @param id id of the heroe.
+   */
+  deleteHeroe(id: number) {
+    this.heroeService.deleteHeroe(id).subscribe(() => {
+      this.heroes$ = this.heroeService.getHeroes();
+      this.changeDetectorRef.markForCheck();
+    });
+  }
 }
