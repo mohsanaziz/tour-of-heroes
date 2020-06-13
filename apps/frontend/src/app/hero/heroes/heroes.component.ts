@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Hero } from '../hero.model';
+import { loadHeroes } from '../../+state/hero/hero.actions';
+import { HeroEntity } from '../../+state/hero/hero.models';
+import { HeroState } from '../../+state/hero/hero.reducer';
+import { getHeroes } from '../../+state/hero/hero.selectors';
 import { HeroService } from '../hero.service';
 
 @Component({
@@ -11,13 +15,14 @@ import { HeroService } from '../hero.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroesComponent implements OnInit {
-  public heroes$: Observable<Hero[]>;
+  public heroes$: Observable<HeroEntity[]>;
   public heroName: string;
 
-  constructor(private heroService: HeroService, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private heroService: HeroService, private changeDetectorRef: ChangeDetectorRef, private store: Store<HeroState>) {}
 
   ngOnInit(): void {
-    this.heroes$ = this.heroService.getHeroes();
+    this.store.dispatch(loadHeroes());
+    this.heroes$ = this.store.pipe(select(getHeroes));
   }
 
   /**
@@ -28,7 +33,8 @@ export class HeroesComponent implements OnInit {
       return;
     }
     this.heroService.addHero({ name: this.heroName }).subscribe(() => {
-      this.heroes$ = this.heroService.getHeroes();
+      this.store.dispatch(loadHeroes());
+      this.heroes$ = this.store.pipe(select(getHeroes));
       this.changeDetectorRef.markForCheck();
     });
     this.heroName = '';
@@ -41,7 +47,8 @@ export class HeroesComponent implements OnInit {
    */
   deleteHero(id: number) {
     this.heroService.deleteHero(id).subscribe(() => {
-      this.heroes$ = this.heroService.getHeroes();
+      this.store.dispatch(loadHeroes());
+      this.heroes$ = this.store.pipe(select(getHeroes));
       this.changeDetectorRef.markForCheck();
     });
   }

@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
+import { loadHeroes } from '../../+state/hero/hero.actions';
+import { HeroEntity } from '../../+state/hero/hero.models';
+import { HeroState } from '../../+state/hero/hero.reducer';
+import { getHeroes } from '../../+state/hero/hero.selectors';
 import { Hero } from '../hero.model';
 import { HeroService } from '../hero.service';
 
@@ -12,15 +17,16 @@ import { HeroService } from '../hero.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  public heroes$: Observable<Hero[]>;
+  public heroes$: Observable<HeroEntity[]>;
   public searchHeroes$: Observable<Hero[]>;
 
   private searchTerms = new Subject<string>();
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService, private store: Store<HeroState>) {}
 
   ngOnInit(): void {
-    this.heroes$ = this.heroService.getHeroes();
+    this.store.dispatch(loadHeroes());
+    this.heroes$ = this.store.pipe(select(getHeroes));
 
     this.searchHeroes$ = this.searchTerms.pipe(
       debounceTime(300),

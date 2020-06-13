@@ -3,4 +3,5 @@
  */
 export interface HeroEntity {
   id: string | number; // Primary ID
+  name: string;
 }

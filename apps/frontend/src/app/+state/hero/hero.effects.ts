@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
+import { map } from 'rxjs/operators';
 
-import * as fromHero from './hero.reducer';
+import { HeroService } from '../../hero/hero.service';
 import * as HeroActions from './hero.actions';
 
 @Injectable()
 export class HeroEffects {
-  loadHero$ = createEffect(() =>
+  getHero$ = createEffect(() =>
     this.actions$.pipe(
       ofType(HeroActions.loadHero),
       fetch({
         run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return HeroActions.loadHeroSuccess({ hero: [] });
+          return this.heroService.getHero(action.id).pipe(map((hero) => HeroActions.loadHeroSuccess({ hero })));
         },
 
         onError: (action, error) => {
@@ -24,5 +24,20 @@ export class HeroEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  getHeroes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HeroActions.loadHeroes),
+      fetch({
+        run: (action) => {
+          return this.heroService.getHeroes().pipe(map((heroes) => HeroActions.loadHeroesSuccess({ hero: heroes })));
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return HeroActions.loadHeroesFailure({ error });
+        },
+      })
+    )
+  );
+
+  constructor(private actions$: Actions, private heroService: HeroService) {}
 }

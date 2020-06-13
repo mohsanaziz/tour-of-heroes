@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { HeroEntity } from '../+state/hero/hero.models';
 import { Hero } from './hero.model';
 
 @Injectable({
@@ -19,11 +20,11 @@ export class HeroService {
    *
    * @returns A list of heroes.
    */
-  getHeroes(query?: string): Observable<Hero[]> {
+  getHeroes(query?: string): Observable<HeroEntity[]> {
     if (query) {
-      return this.http.get<Hero[]>(this.HERO_API, { params: { query } });
+      return this.http.get<HeroEntity[]>(this.HERO_API, { params: { query } });
     }
-    return this.http.get<Hero[]>(this.HERO_API);
+    return this.http.get<HeroEntity[]>(this.HERO_API);
   }
 
   /**
@@ -53,8 +54,8 @@ export class HeroService {
    *
    * @returns The hero.
    */
-  getHero(id: number): Observable<Hero> {
-    return this.http.get<Hero>(`${this.HERO_API}/${id}`);
+  getHero(id: number): Observable<HeroEntity> {
+    return this.http.get<HeroEntity>(`${this.HERO_API}/${id}`);
   }
 
   /**
