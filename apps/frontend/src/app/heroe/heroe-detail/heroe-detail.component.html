@@ -1,1 +1,15 @@
-<p>heroe-detail works!</p>
+<ng-container *ngIf="heroe$ | async as heroe">
+  <div class="header">
+    <button mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ heroe.name | uppercase }} Details</h2>
+  </div>
+  <label>
+    name:
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="heroe.name" />
+    </mat-form-field>
+  </label>
+  <button mat-flat-button color="primary">Save</button>
+</ng-container>

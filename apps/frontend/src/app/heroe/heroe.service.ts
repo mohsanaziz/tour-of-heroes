@@ -45,4 +45,15 @@ export class HeroeService {
   deleteHeroe(id: number): Observable<void> {
     return this.http.delete<void>(`${this.HEROE_API}/${id}`);
   }
+
+  /**
+   * Get the heroe.
+   *
+   * @param {number} id id of the heroe.
+   *
+   * @returns The heroe.
+   */
+  getHeroe(id: number): Observable<Heroe> {
+    return this.http.get<Heroe>(`${this.HEROE_API}/${id}`);
+  }
 }

@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { Heroe } from '../heroe.model';
+import { HeroeService } from '../heroe.service';
 
 @Component({
   selector: 'maz-heroe-detail',
@@ -7,7 +12,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroeDetailComponent implements OnInit {
-  constructor() {}
+  public heroe$: Observable<Heroe>;
 
-  ngOnInit(): void {}
+  constructor(private activatedRoute: ActivatedRoute, private heroeService: HeroeService) {}
+
+  ngOnInit(): void {
+    const id = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.heroe$ = this.heroeService.getHeroe(id);
+  }
 }
