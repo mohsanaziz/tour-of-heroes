@@ -9,7 +9,14 @@
 </div>
 
 <mat-chip-list class="mat-chip-list-stacked">
-  <mat-chip *ngFor="let heroe of heroes$ | async" selected color="primary" removable (removed)="deleteHeroe(heroe.id)">
+  <mat-chip
+    *ngFor="let heroe of heroes$ | async"
+    selected
+    color="primary"
+    removable
+    (removed)="deleteHeroe(heroe.id)"
+    [routerLink]="['/heroe-detail', heroe.id]"
+  >
     {{ heroe.name }}
     <mat-icon matChipRemove>close</mat-icon>
   </mat-chip>
