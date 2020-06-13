@@ -56,4 +56,13 @@ export class HeroeService {
   getHeroe(id: number): Observable<Heroe> {
     return this.http.get<Heroe>(`${this.HEROE_API}/${id}`);
   }
+
+  /**
+   * Update a heroe.
+   *
+   * @param {Heroe} heroe The heroe to update.
+   */
+  editHero(hero: Heroe): Observable<void> {
+    return this.http.put<void>(this.HEROE_API, hero);
+  }
 }
