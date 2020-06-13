@@ -1,0 +1,15 @@
+<ng-container *ngIf="hero$ | async as hero">
+  <div class="header">
+    <button mat-icon-button (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ hero.name | uppercase }} Details</h2>
+  </div>
+  <label>
+    name:
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="hero.name" />
+    </mat-form-field>
+  </label>
+  <button mat-flat-button color="primary" (click)="save(hero)">Save</button>
+</ng-container>

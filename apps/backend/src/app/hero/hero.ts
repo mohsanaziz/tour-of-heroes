@@ -1,5 +1,5 @@
 import { InMemoryDBEntity } from '@nestjs-addons/in-memory-db';
 
-export interface Heroe extends InMemoryDBEntity {
+export interface Hero extends InMemoryDBEntity {
   name: string;
 }

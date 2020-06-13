@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-import { Heroe } from '../heroe.model';
-import { HeroeService } from '../heroe.service';
+import { Hero } from '../hero.model';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'maz-dashboard',
@@ -12,15 +12,15 @@ import { HeroeService } from '../heroe.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  public heroes$: Observable<Heroe[]>;
-  public searchHeroes$: Observable<Heroe[]>;
+  public heroes$: Observable<Hero[]>;
+  public searchHeroes$: Observable<Hero[]>;
 
   private searchTerms = new Subject<string>();
 
-  constructor(private heroeService: HeroeService) {}
+  constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
-    this.heroes$ = this.heroeService.getHeroes();
+    this.heroes$ = this.heroService.getHeroes();
 
     this.searchHeroes$ = this.searchTerms.pipe(
       debounceTime(300),
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
           return of([]);
         }
 
-        return this.heroeService.getHeroes(query);
+        return this.heroService.getHeroes(query);
       })
     );
   }

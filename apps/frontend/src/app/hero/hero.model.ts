@@ -1,3 +1,3 @@
-export class Heroe {
+export class Hero {
   constructor(public id?: number, public name?: string) {}
 }

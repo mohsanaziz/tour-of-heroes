@@ -1,0 +1,23 @@
+<h1>My Heroes</h1>
+
+<div class="flex-gap">
+  <label for="hero-name">Hero name :</label>
+  <mat-form-field appearance="outline">
+    <input id="hero-name" matInput [(ngModel)]="heroName" (keyup.enter)="addHero()" />
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="addHero()">Add</button>
+</div>
+
+<mat-chip-list class="mat-chip-list-stacked">
+  <mat-chip
+    *ngFor="let hero of heroes$ | async"
+    selected
+    color="primary"
+    removable
+    (removed)="deleteHeroe(hero.id)"
+    [routerLink]="['/hero-detail', hero.id]"
+  >
+    {{ hero.name }}
+    <mat-icon matChipRemove>close</mat-icon>
+  </mat-chip>
+</mat-chip-list>
