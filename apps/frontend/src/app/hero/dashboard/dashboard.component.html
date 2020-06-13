@@ -2,20 +2,20 @@
   <h1>Top Heroes</h1>
 
   <div class="top-heroes">
-    <a *ngFor="let hero of heroes$ | async" class="top-heroe">
+    <a *ngFor="let hero of heroes$ | async" class="top-hero">
       <span>{{ hero.name }}</span>
     </a>
   </div>
 </section>
 
 <section>
-  <h1>Heroe search</h1>
+  <h1>Hero search</h1>
 
   <mat-form-field appearance="outline">
     <input matInput [matAutocomplete]="auto" (input)="searchHeroe($event.target.value)" />
 
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let heroe of searchHeroes$ | async" [value]="heroe">{{ heroe.name }}</mat-option>
+      <mat-option *ngFor="let hero of searchHeroes$ | async" [value]="hero">{{ hero.name }}</mat-option>
     </mat-autocomplete>
   </mat-form-field>
 </section>
