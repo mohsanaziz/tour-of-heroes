@@ -69,5 +69,20 @@ export class HeroEffects {
     )
   );
 
+  editHero$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HeroActions.editHero),
+      fetch({
+        run: (action) => {
+          return this.heroService.editHero(action.hero).pipe(map(() => HeroActions.editHeroSuccess()));
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return HeroActions.editHeroFailure({ error });
+        },
+      })
+    )
+  );
+
   constructor(private actions$: Actions, private heroService: HeroService) {}
 }

@@ -16,4 +16,8 @@ export const addHeroFailure = createAction('[Hero] ADD Hero Failure', props<{ er
 
 export const deleteHero = createAction('[Hero] DELETE Hero', props<{ id: number }>());
 export const deleteHeroSuccess = createAction('[Hero] DELETE Hero Success', props<{ id: number }>());
-export const deleteHeroFailure = createAction('[Hero] DELETEE Hero Failure', props<{ error: any }>());
+export const deleteHeroFailure = createAction('[Hero] DELETE Hero Failure', props<{ error: any }>());
+
+export const editHero = createAction('[Hero] PUT Hero', props<{ hero: HeroEntity }>());
+export const editHeroSuccess = createAction('[Hero] PUT Hero Success');
+export const editHeroFailure = createAction('[Hero] PUT Hero Failure', props<{ error: any }>());

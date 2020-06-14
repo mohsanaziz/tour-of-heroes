@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HeroEntity } from '../+state/hero/hero.models';
-import { Hero } from './hero.model';
 
 @Injectable({
   providedIn: 'root',
@@ -61,9 +60,9 @@ export class HeroService {
   /**
    * Update a hero.
    *
-   * @param {Hero} hero The hero to update.
+   * @param {HeroEntity} hero The hero to update.
    */
-  editHero(hero: Hero): Observable<void> {
+  editHero(hero: HeroEntity): Observable<void> {
     return this.http.put<void>(this.HERO_API, hero);
   }
 }
