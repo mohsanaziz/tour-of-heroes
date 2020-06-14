@@ -7,7 +7,6 @@ import { HeroEntity } from './hero.models';
 export const HERO_FEATURE_KEY = 'hero';
 
 export interface HeroState extends EntityState<HeroEntity> {
-  hero: HeroEntity;
   selectedId?: string | number; // which Hero record has been selected
   loaded: boolean; // has the Hero list been loaded
   error?: string | null; // last none error (if any)
@@ -21,7 +20,6 @@ export const heroAdapter: EntityAdapter<HeroEntity> = createEntityAdapter<HeroEn
 
 export const initialState: HeroState = heroAdapter.getInitialState({
   // set initial required properties
-  hero: { id: null, name: null },
   loaded: false,
 });
 
