@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Hero } from './hero.model';
+import { HeroEntity } from '../+state/hero/hero.models';
 
 @Injectable({
   providedIn: 'root',
@@ -19,22 +19,22 @@ export class HeroService {
    *
    * @returns A list of heroes.
    */
-  getHeroes(query?: string): Observable<Hero[]> {
+  getHeroes(query?: string): Observable<HeroEntity[]> {
     if (query) {
-      return this.http.get<Hero[]>(this.HERO_API, { params: { query } });
+      return this.http.get<HeroEntity[]>(this.HERO_API, { params: { query } });
     }
-    return this.http.get<Hero[]>(this.HERO_API);
+    return this.http.get<HeroEntity[]>(this.HERO_API);
   }
 
   /**
    * Create a hero.
    *
-   * @param {Hero} hero The hero to create.
+   * @param {HeroEntity} hero The hero to create.
    *
    * @returns The hero created.
    */
-  addHero(hero: { name: string }): Observable<Hero> {
-    return this.http.post<Hero>(this.HERO_API, hero);
+  addHero(hero: { name: string }): Observable<HeroEntity> {
+    return this.http.post<HeroEntity>(this.HERO_API, hero);
   }
 
   /**
@@ -53,16 +53,16 @@ export class HeroService {
    *
    * @returns The hero.
    */
-  getHero(id: number): Observable<Hero> {
-    return this.http.get<Hero>(`${this.HERO_API}/${id}`);
+  getHero(id: number): Observable<HeroEntity> {
+    return this.http.get<HeroEntity>(`${this.HERO_API}/${id}`);
   }
 
   /**
    * Update a hero.
    *
-   * @param {Hero} hero The hero to update.
+   * @param {HeroEntity} hero The hero to update.
    */
-  editHero(hero: Hero): Observable<void> {
+  editHero(hero: HeroEntity): Observable<void> {
     return this.http.put<void>(this.HERO_API, hero);
   }
 }

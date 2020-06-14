@@ -1,10 +1,14 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-import { Hero } from '../hero.model';
-import { HeroService } from '../hero.service';
+import { editHero, loadHero } from '../../+state/hero/hero.actions';
+import { HeroEntity } from '../../+state/hero/hero.models';
+import { HeroState } from '../../+state/hero/hero.reducer';
+import { getHero } from '../../+state/hero/hero.selectors';
 
 @Component({
   selector: 'maz-hero-detail',
@@ -13,13 +17,18 @@ import { HeroService } from '../hero.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroDetailComponent implements OnInit {
-  public hero$: Observable<Hero>;
+  public hero$: Observable<HeroEntity>;
+  public heroName: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private heroService: HeroService, private location: Location) {}
+  constructor(private activatedRoute: ActivatedRoute, private location: Location, private store: Store<HeroState>) {}
 
   ngOnInit(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.hero$ = this.heroService.getHero(id);
+    this.store.dispatch(loadHero({ id }));
+    this.hero$ = this.store.pipe(
+      select(getHero),
+      tap((hero: HeroEntity) => (this.heroName = hero?.name))
+    );
   }
 
   /**
@@ -34,7 +43,10 @@ export class HeroDetailComponent implements OnInit {
    *
    * @param hero The hero.
    */
-  save(hero: Hero): void {
-    this.heroService.editHero(hero).subscribe(() => this.back());
+  save(hero: HeroEntity): void {
+    const heroToUpdate = { ...hero, name: this.heroName };
+
+    this.store.dispatch(editHero({ hero: heroToUpdate }));
+    this.back();
   }
 }

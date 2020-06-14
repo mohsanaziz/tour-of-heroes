@@ -14,7 +14,7 @@
     selected
     color="primary"
     removable
-    (removed)="deleteHeroe(hero.id)"
+    (removed)="deleteHero(hero.id)"
     [routerLink]="['/hero-detail', hero.id]"
   >
     {{ hero.name }}
