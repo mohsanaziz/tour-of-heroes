@@ -13,3 +13,7 @@ export const loadHeroesFailure = createAction('[Hero] GET all heroes Failure', p
 export const addHero = createAction('[Hero] ADD Hero', props<{ hero: HeroEntity }>());
 export const addHeroSuccess = createAction('[Hero] ADD Hero Success', props<{ hero: HeroEntity }>());
 export const addHeroFailure = createAction('[Hero] ADD Hero Failure', props<{ error: any }>());
+
+export const deleteHero = createAction('[Hero] DELETE Hero', props<{ id: number }>());
+export const deleteHeroSuccess = createAction('[Hero] DELETE Hero Success', props<{ id: number }>());
+export const deleteHeroFailure = createAction('[Hero] DELETEE Hero Failure', props<{ error: any }>());

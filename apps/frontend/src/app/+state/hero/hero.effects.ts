@@ -54,5 +54,20 @@ export class HeroEffects {
     )
   );
 
+  deleteHero$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HeroActions.deleteHero),
+      fetch({
+        run: (action) => {
+          return this.heroService.deleteHero(action.id).pipe(map(() => HeroActions.deleteHeroSuccess({ id: action.id })));
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return HeroActions.deleteHeroFailure({ error });
+        },
+      })
+    )
+  );
+
   constructor(private actions$: Actions, private heroService: HeroService) {}
 }

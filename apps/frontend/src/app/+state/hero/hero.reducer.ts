@@ -35,7 +35,10 @@ const heroReducer = createReducer(
   on(HeroActions.loadHeroesFailure, (state, { error }) => ({ ...state, error })),
   on(HeroActions.addHero, (state) => ({ ...state, loaded: false, error: null })),
   on(HeroActions.addHeroSuccess, (state, { hero }) => heroAdapter.addOne(hero, { ...state, loaded: true })),
-  on(HeroActions.addHeroFailure, (state, { error }) => ({ ...state, error }))
+  on(HeroActions.addHeroFailure, (state, { error }) => ({ ...state, error })),
+  on(HeroActions.deleteHero, (state) => ({ ...state, loaded: false, error: null })),
+  on(HeroActions.deleteHeroSuccess, (state, { id }) => heroAdapter.removeOne(id, { ...state, loaded: true })),
+  on(HeroActions.deleteHeroFailure, (state, { error }) => ({ ...state, error }))
 );
 
 export function reducer(state: HeroState | undefined, action: Action) {
