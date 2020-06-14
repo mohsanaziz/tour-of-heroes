@@ -28,7 +28,7 @@ export const initialState: HeroState = heroAdapter.getInitialState({
 const heroReducer = createReducer(
   initialState,
   on(HeroActions.loadHero, (state) => ({ ...state, loaded: false, error: null })),
-  on(HeroActions.loadHeroSuccess, (state, { hero }) => ({ ...state, loaded: true, hero })),
+  on(HeroActions.loadHeroSuccess, (state, { hero }) => heroAdapter.setOne(hero, { ...state, loaded: true, selectedId: hero.id })),
   on(HeroActions.loadHeroFailure, (state, { error }) => ({ ...state, error })),
   on(HeroActions.loadHeroes, (state) => ({ ...state, loaded: false, error: null })),
   on(HeroActions.loadHeroesSuccess, (state, { heroes }) => heroAdapter.setAll(heroes, { ...state, loaded: true })),
