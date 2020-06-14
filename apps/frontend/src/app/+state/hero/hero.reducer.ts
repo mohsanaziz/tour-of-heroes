@@ -1,5 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
 import * as HeroActions from './hero.actions';
 import { HeroEntity } from './hero.models';
@@ -31,8 +31,11 @@ const heroReducer = createReducer(
   on(HeroActions.loadHeroSuccess, (state, { hero }) => ({ ...state, loaded: true, hero })),
   on(HeroActions.loadHeroFailure, (state, { error }) => ({ ...state, error })),
   on(HeroActions.loadHeroes, (state) => ({ ...state, loaded: false, error: null })),
-  on(HeroActions.loadHeroesSuccess, (state, { hero }) => heroAdapter.setAll(hero, { ...state, loaded: true })),
-  on(HeroActions.loadHeroesFailure, (state, { error }) => ({ ...state, error }))
+  on(HeroActions.loadHeroesSuccess, (state, { heroes }) => heroAdapter.setAll(heroes, { ...state, loaded: true })),
+  on(HeroActions.loadHeroesFailure, (state, { error }) => ({ ...state, error })),
+  on(HeroActions.addHero, (state) => ({ ...state, loaded: false, error: null })),
+  on(HeroActions.addHeroSuccess, (state, { hero }) => heroAdapter.addOne(hero, { ...state, loaded: true })),
+  on(HeroActions.addHeroFailure, (state, { error }) => ({ ...state, error }))
 );
 
 export function reducer(state: HeroState | undefined, action: Action) {

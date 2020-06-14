@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { heroAdapter, HeroState, HERO_FEATURE_KEY } from './hero.reducer';
 
 // Lookup the 'Hero' feature state managed by NgRx

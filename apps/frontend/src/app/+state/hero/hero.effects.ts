@@ -29,11 +29,26 @@ export class HeroEffects {
       ofType(HeroActions.loadHeroes),
       fetch({
         run: (action) => {
-          return this.heroService.getHeroes().pipe(map((heroes) => HeroActions.loadHeroesSuccess({ hero: heroes })));
+          return this.heroService.getHeroes().pipe(map((heroes) => HeroActions.loadHeroesSuccess({ heroes })));
         },
         onError: (action, error) => {
           console.error('Error', error);
           return HeroActions.loadHeroesFailure({ error });
+        },
+      })
+    )
+  );
+
+  addHero$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HeroActions.addHero),
+      fetch({
+        run: (action) => {
+          return this.heroService.addHero(action.hero).pipe(map((hero) => HeroActions.addHeroSuccess({ hero })));
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return HeroActions.addHeroFailure({ error });
         },
       })
     )

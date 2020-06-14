@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { loadHeroes } from '../../+state/hero/hero.actions';
+import { addHero, loadHeroes } from '../../+state/hero/hero.actions';
 import { HeroEntity } from '../../+state/hero/hero.models';
 import { HeroState } from '../../+state/hero/hero.reducer';
 import { getHeroes } from '../../+state/hero/hero.selectors';
@@ -32,11 +32,7 @@ export class HeroesComponent implements OnInit {
     if (!this.heroName) {
       return;
     }
-    this.heroService.addHero({ name: this.heroName }).subscribe(() => {
-      this.store.dispatch(loadHeroes());
-      this.heroes$ = this.store.pipe(select(getHeroes));
-      this.changeDetectorRef.markForCheck();
-    });
+    this.store.dispatch(addHero({ hero: { name: this.heroName } as HeroEntity }));
     this.heroName = '';
   }
 

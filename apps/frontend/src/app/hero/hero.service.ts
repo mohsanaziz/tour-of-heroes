@@ -30,12 +30,12 @@ export class HeroService {
   /**
    * Create a hero.
    *
-   * @param {Hero} hero The hero to create.
+   * @param {HeroEntity} hero The hero to create.
    *
    * @returns The hero created.
    */
-  addHero(hero: { name: string }): Observable<Hero> {
-    return this.http.post<Hero>(this.HERO_API, hero);
+  addHero(hero: { name: string }): Observable<HeroEntity> {
+    return this.http.post<HeroEntity>(this.HERO_API, hero);
   }
 
   /**
