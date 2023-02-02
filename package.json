@@ -39,7 +39,7 @@
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@angular/router": "^9.1.0",
-    "@nestjs-addons/in-memory-db": "^1.8.10",
+    "@nestjs-addons/in-memory-db": "^3.0.3",
     "@nestjs/common": "^6.8.3",
     "@nestjs/core": "^6.8.3",
     "@nestjs/platform-express": "^6.8.3",
